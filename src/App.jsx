@@ -2,7 +2,6 @@ import './App.css'
 import MyInput from "./MyInput.jsx"
 import React from "react";
 import CompanyList from "./CompanyList.jsx";
-import 'bootstrap/dist/css/bootstrap.css';
 
 function App() {
     const [list, setList] = React.useState([]);

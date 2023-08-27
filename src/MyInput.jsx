@@ -1,5 +1,4 @@
 import searchCompany from "./logic/getCompanies.js";
-import { useLocation } from 'react-router-dom';
 
 
 function MyInput({setList}) {
