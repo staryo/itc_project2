@@ -10,7 +10,7 @@ function App() {
     return (
         <>
             <div className="row w-100 mb-sm-5 mb-2">
-                <MyInput list={list} setList={setList}/>
+                <MyInput setList={setList}/>
             </div>
 
             <div className="row w-100 mt-sm-5 mt-2">

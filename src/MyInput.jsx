@@ -1,17 +1,20 @@
 import searchCompany from "./logic/getCompanies.js";
+import { useLocation } from 'react-router-dom';
 
 
-function MyInput(props) {
+function MyInput({setList}) {
+
     return (
         <>
             <div className="col">
                 <div className="p-3 rounded-2 box border">
                     <p className="h1 m-0 p-3 text-center text-white" id="result">
-                    Choose company from the list:
+                        Search company
                     </p>
-                    <input className="form-control form-control-lg text-center" list="company" name="company" id="chosen_company" placeholder="Company name" onKeyUp={
+                    <input className="form-control form-control-lg text-center" list="company" name="company"
+                           id="chosen_company" placeholder="Company name" onKeyUp={
                         (currentValue) => {
-                            searchCompany(currentValue.target.value, props.setList)
+                            searchCompany(currentValue.target.value, setList)
                         }
                     }/>
                 </div>

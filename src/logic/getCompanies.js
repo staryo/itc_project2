@@ -7,7 +7,6 @@ export default async function searchCompany(searchString, callback) {
             (response) => response.json()
         )
         .then((companyList) => {
-                console.log(companyList)
                 return callback(companyList)
             }
         ).catch((err) => {

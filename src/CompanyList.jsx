@@ -1,7 +1,11 @@
+import {Link} from "react-router-dom";
+
 function CompanyList(companyList) {
-    // console.log(companyList.children)
-    let optionsList = [];
-    if (companyList.children != undefined) {
+    let optionsList = [{
+        symbol: 'ERROR',
+        name: 'NOT FOUND'
+    }];
+    if (companyList.children.length > 0) {
         optionsList = companyList.children
     }
     return (
@@ -18,23 +22,25 @@ function CompanyList(companyList) {
                             <th className="col-4 text-center d-none d-lg-table-cell" scope="col">stockExchange</th>
                         </tr>
                         </thead>
-                        <tbody id="table-content">
+                        <tbody id="table-content" className="bg-transparent">
                         {
                             optionsList.map(option => (
-                                <tr key={option.symbol}>
-                                    <th scope="row" className="col-1 text-center">{option.symbol}</th>
-                                    <td className="col-5 text-center">{option.name}</td>
-                                    <td className="col-2 text-center">{option.currency}</td>
-                                    <td className="col-4 text-center d-none d-lg-table-cell">{option.stockExchange}</td>
-                                </tr>
+                                <Link className="py-2 m-0" key={option.symbol} to={`company/${option.symbol}`}>
+                                    <tr className="bg-transparent p-5 border-bottom">
+                                        <th scope="row" className="col-1 text-center px-3 py-2">{option.symbol}</th>
+                                        <td className="col-5 text-center px-3 py-2">{option.name}</td>
+                                        <td className="col-2 text-center px-3 py-2">{option.currency}</td>
+                                        <td className="col-4 text-center d-none d-lg-table-cell px-3 py-2">{option.stockExchange}</td>
+                                    </tr>
+                                </Link>
                             ))
                         }
                         </tbody>
                     </table>
                 </div>
             </div>
-</>
-)
+        </>
+    )
 }
 
 export default CompanyList
