@@ -1,0 +1,77 @@
+:root{
+  font-size: 1em;
+}
+
+
+.box {
+  background: transparent;
+  backdrop-filter: blur(10px);
+}
+
+body {
+  height: 100vh;
+  background-image: url('/planet-1702788_1920.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+#inputNumber {
+  background: none;
+  color: #fff;
+  /*border: 1px solid;*/
+  outline: 0;
+  border-width: 0 0 2px 2px;
+  border-color: #fff;
+}
+
+#inputNumber::placeholder {
+  color: #fff;
+}
+
+#inputNumber::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+table tr td, table tr th{
+  color: #fff !important;
+  background-color: rgba(210,130,240, 0) !important;
+}
+
+.well {
+  background: none;
+  height: 320px;
+}
+
+.table-scroll tbody {
+  position: absolute;
+  overflow-y: scroll;
+  height: 200px;
+}
+
+.table-scroll tr {
+  width: 100%;
+  table-layout: fixed;
+  display: inline-table;
+}
+
+.table-scroll thead > tr > th {
+  border: none;
+}
+
+.table-hover>tbody>tr:hover {
+  background-color: rgba(255,255,255,0.1);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0);
+}
