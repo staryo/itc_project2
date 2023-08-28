@@ -3,18 +3,26 @@ import {useEffect, useState} from "react";
 
 
 function MyInput({setList}) {
-    const [inputValue, setInputValue] = useState("")
-    const [debouncedInputValue, setDebouncedInputValue] = useState("");
+    const queryParameters = new URLSearchParams(window.location.search)
+    const [inputValue, setInputValue] = useState(queryParameters.get("search"))
+    const [debouncedInputValue, setDebouncedInputValue] = useState(queryParameters.get("search"));
 
     useEffect(() => {
         const timeoutId = setTimeout(() => {
-            setDebouncedInputValue(inputValue);
+            if (inputValue !== "") {
+                setDebouncedInputValue(inputValue);
+            }
         }, 500);
         return () => clearTimeout(timeoutId);
-    }, [inputValue, 500]);
+    }, [inputValue]);
 
     useEffect(() => {
         searchCompany(debouncedInputValue, setList)
+        window.history.replaceState(
+            history.state,
+            null,
+            `?search=${debouncedInputValue}`
+        );
     }, [debouncedInputValue]);
     return (
         <>
@@ -24,7 +32,7 @@ function MyInput({setList}) {
                         Search company
                     </p>
                     <input className="form-control form-control-lg text-center" list="company" name="company"
-                           id="chosen_company" placeholder="Company name" onKeyUp={
+                           id="chosen_company" placeholder={"Company name"} value={inputValue} onChange={
                         (currentValue) => {
                             setInputValue(currentValue.target.value)
                         }

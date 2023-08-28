@@ -1,6 +1,7 @@
 import {Link} from "react-router-dom";
 
 function CompanyList(companyList) {
+    const queryParameters = new URLSearchParams(window.location.search)
     let optionsList = [{
         symbol: 'ERROR',
         name: 'NOT FOUND'
@@ -25,7 +26,7 @@ function CompanyList(companyList) {
                         <tbody id="table-content" className="bg-transparent">
                         {
                             optionsList.map(option => (
-                                <Link key={option.symbol} className="py-2 m-0" to={`company/${option.symbol}`}>
+                                <Link key={option.symbol} className="py-2 m-0" to={`company/${option.symbol}?search=${queryParameters.get("search")}`}>
                                     <tr className="bg-transparent p-5 border-bottom">
                                         <th scope="row" className="col-1 text-center px-3 py-2">{option.symbol}</th>
                                         <td className="col-5 text-center px-3 py-2">{option.name}</td>

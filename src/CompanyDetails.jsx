@@ -3,6 +3,7 @@ import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
 
 function CompanyDetails(details) {
+    const queryParameters = new URLSearchParams(window.location.search)
     const [imgSrc, setImgSrc] = useState("/not-found.svg");
     const [description, updateDescription] = useState("Description is absent");
     const [companyName, updateCompanyName] = useState("NOT FOUND");
@@ -37,7 +38,7 @@ function CompanyDetails(details) {
                     </p>
                 </div>
                 <div className="col-2">
-                    <Link to={"/"}>
+                    <Link to={`/?search=${queryParameters.get("search")}`}>
                         <img src={"/back.svg"} width={"100%"}/>
                     </Link>
                 </div>
