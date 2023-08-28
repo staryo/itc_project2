@@ -17,17 +17,17 @@ function Company() {
     }, [companyID])
     return (
         <>
-            <div className="row w-100 mb-sm-5 mb-2">
+            <div className="row w-100">
                 <div className="col-12">
                     <div className="p-3 rounded-2 box border">
                         <div className="row">
                             <div className="col">
-                        <CompanyDetails profile={profile}/>
+                                <CompanyDetails profile={profile}/>
                             </div>
                         </div>
                         <div className="row">
                             <div className="col">
-                        <PriceChart history={history}/>
+                                <PriceChart history={history}/>
                             </div>
                         </div>
                     </div>

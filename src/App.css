@@ -7,10 +7,9 @@
     background: transparent;
     backdrop-filter: blur(10px);
 }
-
 body {
     height: 100vh;
-    background-image: url('/planet-1702788_1920.jpg');
+    background-image: url('https://img.freepik.com/free-vector/gradient-stock-market-concept_23-2149166910.jpg?w=1380&t=st=1693244959~exp=1693245559~hmac=4b5f18a87e634f40ec565395580483fa4a456b95274c530866f26c2571b97d2e');
     background-size: cover;
     background-position: center;
 }

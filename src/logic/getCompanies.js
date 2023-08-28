@@ -2,14 +2,7 @@ const stockExchangeURL = "https://stock-exchange-dot-full-stack-course-services.
 const limit = 50
 
 export default async function searchCompany(searchString, callback) {
-    fetch(`${stockExchangeURL}&limit=${limit}&query=${searchString}`)
-        .then(
-            (response) => response.json()
-        )
-        .then((companyList) => {
-                return callback(companyList.sort((a, b) => (a.symbol > b.symbol) ? 1 : -1))
-            }
-        ).catch((err) => {
-        console.log(err)
-    })
+    const response = await fetch(`${stockExchangeURL}&limit=${limit}&query=${searchString}`)
+    const companyList = await response.json()
+    return callback(companyList.sort((a, b) => (a.symbol > b.symbol) ? 1 : -1))
 }
