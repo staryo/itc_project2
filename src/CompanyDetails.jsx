@@ -33,7 +33,7 @@ function CompanyDetails(details) {
 
                     {/*<img src={profileObject.image} width="100%"/>*/}
                 </div>
-                <div className="col-8">
+                <div className="col-8 d-flex flex-column justify-content-center">
                     <p className="text-white h1">{companyData.companyName}</p>
                     <p className="h2 py-3 text-white">Stock
                         price: ${companyData.price}
