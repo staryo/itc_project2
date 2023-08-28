@@ -79,3 +79,11 @@ a tr {
 ::-webkit-scrollbar-track {
     background: rgba(0, 0, 0, 0);
 }
+
+.text-danger {
+    color: #ff9e9e !important;
+}
+
+.text-success {
+    color: #b0ff9e !important;
+}

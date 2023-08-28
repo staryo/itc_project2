@@ -25,7 +25,7 @@ function CompanyList(companyList) {
                         <tbody id="table-content" className="bg-transparent">
                         {
                             optionsList.map(option => (
-                                <Link className="py-2 m-0" key={option.symbol} to={`company/${option.symbol}`}>
+                                <Link key={option.symbol} className="py-2 m-0" to={`company/${option.symbol}`}>
                                     <tr className="bg-transparent p-5 border-bottom">
                                         <th scope="row" className="col-1 text-center px-3 py-2">{option.symbol}</th>
                                         <td className="col-5 text-center px-3 py-2">{option.name}</td>

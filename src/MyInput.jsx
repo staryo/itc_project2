@@ -1,8 +1,21 @@
 import searchCompany from "./logic/getCompanies.js";
+import {useEffect, useState} from "react";
 
 
 function MyInput({setList}) {
+    const [inputValue, setInputValue] = useState("")
+    const [debouncedInputValue, setDebouncedInputValue] = useState("");
 
+    useEffect(() => {
+        const timeoutId = setTimeout(() => {
+            setDebouncedInputValue(inputValue);
+        }, 500);
+        return () => clearTimeout(timeoutId);
+    }, [inputValue, 500]);
+
+    useEffect(() => {
+        searchCompany(debouncedInputValue, setList)
+    }, [debouncedInputValue]);
     return (
         <>
             <div className="col">
@@ -13,7 +26,7 @@ function MyInput({setList}) {
                     <input className="form-control form-control-lg text-center" list="company" name="company"
                            id="chosen_company" placeholder="Company name" onKeyUp={
                         (currentValue) => {
-                            searchCompany(currentValue.target.value, setList)
+                            setInputValue(currentValue.target.value)
                         }
                     }/>
                 </div>

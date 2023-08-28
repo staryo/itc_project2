@@ -1,7 +1,7 @@
-const stockExchangeURL = "https://stock-exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/company/profile/"
+const stockExchangeURL = "https://stock-exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/historical-price-full/"
 
-export default function getCompanyDetails(companyID, callback) {
-    fetch(`${stockExchangeURL}${companyID}`)
+export default function getCompanyHistory(companyID, callback) {
+    fetch(`${stockExchangeURL}${companyID}?serietype=line`)
         .then(
             (response) => response.json()
         )
