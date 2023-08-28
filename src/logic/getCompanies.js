@@ -7,7 +7,7 @@ export default async function searchCompany(searchString, callback) {
             (response) => response.json()
         )
         .then((companyList) => {
-                return callback(companyList)
+                return callback(companyList.sort((a, b) => (a.symbol > b.symbol) ? 1 : -1))
             }
         ).catch((err) => {
         console.log(err)

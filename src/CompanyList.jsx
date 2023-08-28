@@ -19,7 +19,7 @@ function CompanyList(companyList) {
                         <tr>
                             <th className="col-1 text-center" scope="col">Symbol</th>
                             <th className="col-5 text-center" scope="col">Name</th>
-                            <th className="col-2 text-center" scope="col">Currency</th>
+                            <th className="col-2 text-center d-none d-lg-table-cell" scope="col">Currency</th>
                             <th className="col-4 text-center d-none d-lg-table-cell" scope="col">stockExchange</th>
                         </tr>
                         </thead>
@@ -30,7 +30,7 @@ function CompanyList(companyList) {
                                     <tr className="bg-transparent p-5 border-bottom">
                                         <th scope="row" className="col-1 text-center px-3 py-2">{option.symbol}</th>
                                         <td className="col-5 text-center px-3 py-2">{option.name}</td>
-                                        <td className="col-2 text-center px-3 py-2">{option.currency}</td>
+                                        <td className="col-2 text-center px-3 py-2 d-none d-lg-table-cell">{option.currency}</td>
                                         <td className="col-4 text-center d-none d-lg-table-cell px-3 py-2">{option.stockExchange}</td>
                                     </tr>
                                 </Link>
