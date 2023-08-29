@@ -1,4 +1,7 @@
 export default function HumanizedPercentage(number) {
+    if (number.number === "") {
+        return null
+    }
     number = Math.floor(number.number * 100) / 100
     if (number > 0) {
         return (

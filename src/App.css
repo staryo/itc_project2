@@ -43,13 +43,13 @@ a tr {
 
 .well {
     background: none;
-    height: 320px;
+    height: 520px;
 }
 
 .table-scroll tbody {
     position: absolute;
     overflow-y: scroll;
-    height: 200px;
+    height: 400px;
 }
 
 .table-scroll tr {
@@ -60,14 +60,14 @@ a tr {
 
 .link-row {
     cursor: pointer;
+    vertical-align: middle;
 }
 
+.table>tbody>tr>td {
+    vertical-align: middle;
+}
 .table-scroll th {
     border: none;
-}
-
-.table-hover a:hover{
-    background-color: rgba(255, 255, 255, 0.1);
 }
 
 ::-webkit-scrollbar {
