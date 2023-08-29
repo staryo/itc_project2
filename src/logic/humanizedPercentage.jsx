@@ -1,6 +1,8 @@
 export default function HumanizedPercentage(number) {
-    if (number.number === "") {
-        return null
+    if (number.number === "?") {
+        return (
+            <span className="text-success px-1">Please wait</span>
+        )
     }
     number = Math.floor(number.number * 100) / 100
     if (number > 0) {

@@ -66,9 +66,9 @@ function CompanyList(companyList) {
                                         <div className="row">
                                             <div className="col">
                                                 <span className="px-1">
-                                                            {option.price === undefined ? "?" : `$${option.price}`}
+                                                            {option.price === undefined ? "" : `$${option.price}`}
                                                     <HumanizedPercentage
-                                                        number={option.changesPercentage === undefined ? "?" : option.changesPercentage}/>
+                                                        number={option.changesPercentage === undefined ? "" : option.changesPercentage}/>
                                                 </span>
                                             </div>
                                         </div>

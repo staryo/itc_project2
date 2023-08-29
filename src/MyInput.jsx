@@ -17,6 +17,12 @@ function MyInput({setList}) {
     }, [inputValue]);
 
     useEffect(() => {
+        setList([{
+            symbol: 'WAIT',
+            name: 'Loading...',
+            image: '/not-found.svg',
+            changesPercentage: '?'
+        }])
         searchCompany(debouncedInputValue, setList)
         window.history.replaceState(
             history.state,

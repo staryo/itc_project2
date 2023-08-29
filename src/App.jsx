@@ -5,7 +5,6 @@ import CompanyList from "./CompanyList.jsx";
 
 function App() {
     const [list, setList] = React.useState([]);
-
     return (
         <>
             <div className="row w-100 mb-sm-5 mb-2">
