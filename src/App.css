@@ -58,6 +58,10 @@ a tr {
     display: inline-table;
 }
 
+.link-row {
+    cursor: pointer;
+}
+
 .table-scroll th {
     border: none;
 }
