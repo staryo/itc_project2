@@ -14,11 +14,9 @@ export default async function searchCompany(searchString, callback) {
 async function getDetailsForListOfCompanies(list) {
     let newData = {}
     let queue = ''
-    let count = 0
     await Promise.all(
-        await list.map(async (row) => {
-            count += 1
-            if (queue.length > queueLimit || count === list.length) {
+        await list.map(async (row, count) => {
+            if (queue.length > queueLimit || count === list.length - 1) {
                 queue += `${row.symbol}`
                 await getCompanyDetails(queue, (response) => {
                     response.companyProfiles.map(oneCompany => {
