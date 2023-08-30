@@ -1,6 +1,6 @@
 import getCompanyDetails from "./getCompanyDetails.js";
 
-const codesList = ['AAPL', 'TSLA', 'AOSL', 'MSFT', 'GOOGL']
+const codesList = ['AAPL', 'TSLA', 'AOSL', 'MSFT', 'GOOGL', 'ABNB']
 const queueLimit = 300
 
 export default async function getDetailsForListOfCompanies(callback) {
@@ -13,7 +13,7 @@ export default async function getDetailsForListOfCompanies(callback) {
                 await getCompanyDetails(queue, (response) => {
                     response.companyProfiles.map(oneCompany => {
                         result.push({
-                            symbol: symbol,
+                            symbol: oneCompany.symbol,
                             name: oneCompany.profile.companyName,
                             image: oneCompany.profile.image,
                             price: oneCompany.profile.price,
