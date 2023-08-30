@@ -1,11 +1,11 @@
 import '../styles.css'
 import {useParams} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
-import CompanyDetails from "../companyDetails/CompanyDetails.jsx";
+import CompanyDetails from "./CompanyDetails.jsx";
 import React, {useEffect} from "react";
 import getCompanyDetails from "../../api/getCompanyDetails.js";
 import getCompanyHistory from "../../api/getCompanyHistory.js";
-import {PriceChart} from "../companyDetails/PriceChart.jsx";
+import {PriceChart} from "./PriceChart.jsx";
 
 function Company() {
     const {companyID} = useParams();

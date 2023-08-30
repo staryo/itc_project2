@@ -1,12 +1,12 @@
 import getCompanyDetails from "./getCompanyDetails.js";
+import axios from "axios";
 
 const stockExchangeURL = "https://stock-exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/search?exchange=NASDAQ"
 const limit = 50
 
 export default async function searchCompany(searchString, callback) {
-    const response = await fetch(`${stockExchangeURL}&limit=${limit}&query=${searchString}`)
-    let companyList = await response.json()
-    let detailedList = await getDetailsForListOfCompanies(companyList)
+    const companyList = await axios.get(`${stockExchangeURL}&limit=${limit}&query=${searchString}`)
+    let detailedList = await getDetailsForListOfCompanies(companyList.data)
     return callback(detailedList.sort((a, b) => (a.symbol > b.symbol) ? 1 : -1))
 }
 
