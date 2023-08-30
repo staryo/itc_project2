@@ -1,7 +1,7 @@
 import Marquee from "react-fast-marquee";
 
 
-function StockMarquee({}) {
+function StockMarquee() {
     return (
         <>
             <div className="row">
