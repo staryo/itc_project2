@@ -2,7 +2,7 @@ import getCompanyDetails from "./getCompanyDetails.js";
 import axios from "axios";
 
 const stockExchangeURL = "https://stock-exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/search?exchange=NASDAQ"
-const limit = 50
+const limit = 100
 const queueLimit = 300
 
 export default async function searchCompany(searchString, callback) {
@@ -18,7 +18,9 @@ async function getDetailsForListOfCompanies(list) {
         await list.map(async (row, count) => {
             if (queue.length > queueLimit || count === list.length - 1) {
                 queue += `${row.symbol}`
-                await getCompanyDetails(queue, (response) => {
+                const requestQueue = queue
+                queue = ''
+                await getCompanyDetails(requestQueue, (response) => {
                     try {
                         response.companyProfiles.map(oneCompany => {
                             newData[oneCompany.symbol] = {
@@ -36,7 +38,6 @@ async function getDetailsForListOfCompanies(list) {
                     }
 
                 })
-                queue = ''
             } else queue += `${row.symbol},`
         }))
     await list.map(async (row) => {

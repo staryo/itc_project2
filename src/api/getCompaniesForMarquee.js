@@ -10,7 +10,9 @@ export default async function getDetailsForListOfCompanies(callback) {
         codesList.map(async (symbol, count) => {
             if (queue.length > queueLimit || count === codesList.length - 1) {
                 queue += `${symbol}`
-                await getCompanyDetails(queue, (response) => {
+                const requestQueue = queue
+                queue = ''
+                await getCompanyDetails(requestQueue, (response) => {
                     response.companyProfiles.map(oneCompany => {
                         result.push({
                             symbol: oneCompany.symbol,
@@ -21,7 +23,6 @@ export default async function getDetailsForListOfCompanies(callback) {
                         })
                     })
                 })
-                queue = ''
             } else queue += `${symbol},`
         })
     )
