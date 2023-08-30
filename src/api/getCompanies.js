@@ -1,9 +1,9 @@
 import getCompanyDetails from "./getCompanyDetails.js";
 import axios from "axios";
+import chunkCompanyList from "../utils/chunkCompanyList.jsx";
 
 const stockExchangeURL = "https://stock-exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/search?exchange=NASDAQ"
 const limit = 100
-const queueLimit = 300
 
 export default async function searchCompany(searchString, callback) {
     const companyList = await axios.get(`${stockExchangeURL}&limit=${limit}&query=${searchString}`)
@@ -13,39 +13,38 @@ export default async function searchCompany(searchString, callback) {
 
 async function getDetailsForListOfCompanies(list) {
     let newData = {}
-    let queue = ''
-    await Promise.all(
-        await list.map(async (row, count) => {
-            if (queue.length > queueLimit || count === list.length - 1) {
-                queue += `${row.symbol}`
-                const requestQueue = queue
-                queue = ''
-                await getCompanyDetails(requestQueue, (response) => {
-                    try {
-                        response.companyProfiles.map(oneCompany => {
-                            newData[oneCompany.symbol] = {
-                                image: oneCompany.profile.image,
-                                price: oneCompany.profile.price,
-                                changesPercentage: oneCompany.profile.changesPercentage
-                            }
-                        })
-                    } catch (e) {
-                        newData[response.symbol] = {
-                            image: response.profile.image,
-                            price: response.profile.price,
-                            changesPercentage: response.profile.changesPercentage
-                        }
+    const companyList = await list.map((row) => (row.symbol))
+    const chunkedList = await chunkCompanyList(companyList)
+    await Promise.all(await chunkedList.map(async (requestQueue) => {
+        await getCompanyDetails(requestQueue, (response) => {
+            if ('companyProfiles' in response) {
+                response.companyProfiles.map(oneCompany => {
+                    newData[oneCompany.symbol] = {
+                        image: oneCompany.profile.image,
+                        price: oneCompany.profile.price,
+                        changesPercentage: oneCompany.profile.changesPercentage
                     }
-
                 })
-            } else queue += `${row.symbol},`
-        }))
-    await list.map(async (row) => {
-        Object.assign(row, {
-            image: newData[row.symbol].image,
-            price: newData[row.symbol].price,
-            changesPercentage: newData[row.symbol].changesPercentage
+            } else {
+                newData[response.symbol] = {
+                    image: response.profile.image,
+                    price: response.profile.price,
+                    changesPercentage: response.profile.changesPercentage
+                }
+            }
         })
+    }))
+    await list.map(async (row) => {
+        try {
+            Object.assign(row, {
+                image: newData[row.symbol].image,
+                price: newData[row.symbol].price,
+                changesPercentage: newData[row.symbol].changesPercentage
+            })
+        } catch (e) {
+            console.log(row, newData[row.symbol])
+        }
+
     })
     return list
 }

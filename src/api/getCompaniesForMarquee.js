@@ -1,29 +1,24 @@
 import getCompanyDetails from "./getCompanyDetails.js";
+import chunkCompanyList from "../utils/chunkCompanyList.jsx";
 
-const codesList = ['AAPL', 'TSLA', 'AOSL', 'MSFT', 'GOOGL', 'ABNB', 'NVDA', 'AMZN']
-const queueLimit = 300
+const codesList = ['AAPL', 'TSLA', 'AOSL', 'MSFT', 'GOOGL', 'ABNB', 'NVDA', 'AMZN', 'ATVI']
 
 export default async function getDetailsForListOfCompanies(callback) {
     let result = []
-    let queue = ''
+    const chunkedList = await chunkCompanyList(codesList)
     await Promise.all(
-        codesList.map(async (symbol, count) => {
-            if (queue.length > queueLimit || count === codesList.length - 1) {
-                queue += `${symbol}`
-                const requestQueue = queue
-                queue = ''
-                await getCompanyDetails(requestQueue, (response) => {
-                    response.companyProfiles.map(oneCompany => {
-                        result.push({
-                            symbol: oneCompany.symbol,
-                            name: oneCompany.profile.companyName,
-                            image: oneCompany.profile.image,
-                            price: oneCompany.profile.price,
-                            changesPercentage: oneCompany.profile.changesPercentage
-                        })
+        chunkedList.map(async (symbols) => {
+            await getCompanyDetails(symbols, (response) => {
+                response.companyProfiles.map(oneCompany => {
+                    result.push({
+                        symbol: oneCompany.symbol,
+                        name: oneCompany.profile.companyName,
+                        image: oneCompany.profile.image,
+                        price: oneCompany.profile.price,
+                        changesPercentage: oneCompany.profile.changesPercentage
                     })
                 })
-            } else queue += `${symbol},`
+            })
         })
     )
     return callback(result)
