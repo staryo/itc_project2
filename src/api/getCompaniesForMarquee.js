@@ -22,8 +22,7 @@ export default async function getDetailsForListOfCompanies(callback) {
                     })
                 })
                 queue = ''
-            }
-            queue += `${symbol},`
+            } else queue += `${symbol},`
         })
     )
     return callback(result)

@@ -37,8 +37,7 @@ async function getDetailsForListOfCompanies(list) {
 
                 })
                 queue = ''
-            }
-            queue += `${row.symbol},`
+            } else queue += `${row.symbol},`
         }))
     await list.map(async (row) => {
         Object.assign(row, {
