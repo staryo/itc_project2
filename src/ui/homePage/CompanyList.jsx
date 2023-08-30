@@ -1,5 +1,5 @@
 import {useNavigate} from "react-router-dom";
-import HumanizedPercentage from "./logic/humanizedPercentage.jsx";
+import HumanizedPercentage from "../../utils/humanizedPercentage.jsx";
 
 function CompanyList(companyList) {
     const queryParameters = new URLSearchParams(window.location.search)
@@ -46,7 +46,7 @@ function CompanyList(companyList) {
                                     }
                                 }}>
                                     <th scope="row" className="col-1 text-center px-3 py-2">
-                                        <div className="row flex-column justify-content-center">
+                                        <div className="row flex-column justify-content-center align-content-center">
                                             <div className="col">
                                                 <img src={option.image} width="100%" onError={(e) => (
                                                     e.target.src = "/not-found.svg"

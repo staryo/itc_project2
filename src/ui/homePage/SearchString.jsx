@@ -1,8 +1,9 @@
-import searchCompany from "./logic/getCompanies.js";
+import searchCompany from "../../api/getCompanies.js";
 import {useEffect, useState} from "react";
+import Marquee from "react-fast-marquee";
 
 
-function MyInput({setList}) {
+function SearchString({setList}) {
     const queryParameters = new URLSearchParams(window.location.search)
     const [inputValue, setInputValue] = useState(queryParameters.get("search"))
     const [debouncedInputValue, setDebouncedInputValue] = useState(queryParameters.get("search"));
@@ -32,21 +33,17 @@ function MyInput({setList}) {
     }, [debouncedInputValue]);
     return (
         <>
-            <div className="col">
-                <div className="p-3 rounded-2 box border">
-                    <p className="h1 m-0 p-3 text-center text-white" id="result">
-                        Search company
-                    </p>
-                    <input className="form-control form-control-lg text-center" list="company" name="company"
-                           id="chosen_company" placeholder={"Company name"} value={inputValue} onChange={
-                        (currentValue) => {
-                            setInputValue(currentValue.target.value)
-                        }
-                    }/>
-                </div>
-            </div>
+            <p className="h1 m-0 p-3 text-center text-white" id="result">
+                Search company
+            </p>
+            <input className="form-control form-control-lg text-center" list="company" name="company"
+                   id="chosen_company" placeholder={"Company name"} value={inputValue} onChange={
+                (currentValue) => {
+                    setInputValue(currentValue.target.value)
+                }
+            }/>
         </>
     )
 }
 
-export default MyInput
+export default SearchString

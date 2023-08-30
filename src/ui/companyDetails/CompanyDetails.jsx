@@ -1,4 +1,4 @@
-import HumanizedPercentage from "./logic/humanizedPercentage.jsx";
+import HumanizedPercentage from "../../utils/humanizedPercentage.jsx";
 import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
 
