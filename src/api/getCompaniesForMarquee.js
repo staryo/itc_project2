@@ -1,6 +1,6 @@
 import getCompanyDetails from "./getCompanyDetails.js";
 
-const codesList = ['AAPL', 'TSLA', 'AOSL', 'MSFT', 'GOOGL', 'ABNB']
+const codesList = ['AAPL', 'TSLA', 'AOSL', 'MSFT', 'GOOGL', 'ABNB', 'NVDA', 'AMZN']
 const queueLimit = 300
 
 export default async function getDetailsForListOfCompanies(callback) {

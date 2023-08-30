@@ -19,14 +19,22 @@ async function getDetailsForListOfCompanies(list) {
             if (queue.length > queueLimit || count === list.length - 1) {
                 queue += `${row.symbol}`
                 await getCompanyDetails(queue, (response) => {
-                    response.companyProfiles.map(oneCompany => {
-                        newData[oneCompany.symbol] = {
-                            image: oneCompany.profile.image,
-                            price: oneCompany.profile.price,
-                            changesPercentage: oneCompany.profile.changesPercentage
+                    try {
+                        response.companyProfiles.map(oneCompany => {
+                            newData[oneCompany.symbol] = {
+                                image: oneCompany.profile.image,
+                                price: oneCompany.profile.price,
+                                changesPercentage: oneCompany.profile.changesPercentage
+                            }
+                        })
+                    } catch (e) {
+                        newData[response.symbol] = {
+                            image: response.profile.image,
+                            price: response.profile.price,
+                            changesPercentage: response.profile.changesPercentage
                         }
+                    }
 
-                    })
                 })
                 queue = ''
             }
