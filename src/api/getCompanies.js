@@ -3,6 +3,7 @@ import axios from "axios";
 
 const stockExchangeURL = "https://stock-exchange-dot-full-stack-course-services.ew.r.appspot.com/api/v3/search?exchange=NASDAQ"
 const limit = 50
+const queueLimit = 300
 
 export default async function searchCompany(searchString, callback) {
     const companyList = await axios.get(`${stockExchangeURL}&limit=${limit}&query=${searchString}`)
@@ -11,15 +12,34 @@ export default async function searchCompany(searchString, callback) {
 }
 
 async function getDetailsForListOfCompanies(list) {
+    let newData = {}
+    let queue = ''
+    let count = 0
     await Promise.all(
-        list.map(async (row) => {
-            await getCompanyDetails(row.symbol, (response) => {
-                Object.assign(row, {
-                    image: response.profile.image,
-                    price: response.profile.price,
-                    changesPercentage: response.profile.changesPercentage
+        await list.map(async (row) => {
+            count += 1
+            if (queue.length > queueLimit || count === list.length) {
+                queue += `${row.symbol}`
+                await getCompanyDetails(queue, (response) => {
+                    response.companyProfiles.map(oneCompany => {
+                        newData[oneCompany.symbol] = {
+                            image: oneCompany.profile.image,
+                            price: oneCompany.profile.price,
+                            changesPercentage: oneCompany.profile.changesPercentage
+                        }
+
+                    })
                 })
-            })
+                queue = ''
+            }
+            queue += `${row.symbol},`
         }))
+    await list.map(async (row) => {
+        Object.assign(row, {
+            image: newData[row.symbol].image,
+            price: newData[row.symbol].price,
+            changesPercentage: newData[row.symbol].changesPercentage
+        })
+    })
     return list
 }

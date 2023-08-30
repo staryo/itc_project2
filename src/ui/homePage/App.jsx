@@ -11,7 +11,7 @@ function App() {
             <div className="row w-100">
                 <div className="col">
                     <div className="p-3 rounded-2">
-                        <StockMarquee/>
+                        {/*<StockMarquee/>*/}
                     </div>
                 </div>
             </div>

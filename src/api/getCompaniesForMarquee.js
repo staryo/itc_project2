@@ -7,7 +7,6 @@ export default async function getDetailsForListOfCompanies(callback) {
     await Promise.all(
         codesList.map(async (symbol) => {
             await getCompanyDetails(symbol, (response) => {
-                console.log(response)
                 result.push({
                     symbol: symbol,
                     name: response.profile.companyName,
