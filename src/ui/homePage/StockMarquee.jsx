@@ -7,8 +7,6 @@ import HumanizedPercentage from "../../utils/humanizedPercentage.jsx";
 function StockMarquee() {
     const [topCompanies, updateTopCompanies] = React.useState([{
         symbol: '',
-        price: '',
-        changesPercentage: ''
     }]);
     useEffect(() => {
         getDetailsForListOfCompanies(updateTopCompanies)
@@ -22,9 +20,9 @@ function StockMarquee() {
                         {
                             topCompanies.map(company => (
                                 <div key={company.symbol} className="px-4">
-                                    <span>{company.name}</span>
-                                    <span>({company.symbol})</span>
-                                    <span className="px-2">${company.price}</span>
+                                    <span>{company.name === undefined ? '': company.name}</span>
+                                    <span>{company.symbol === '' ? '': `(${company.symbol})`}</span>
+                                    <span className="px-2">{company.price === undefined ? '': `$${company.price}`}</span>
                                     <HumanizedPercentage
                                         number={
                                             company.changesPercentage === undefined ? "" : company.changesPercentage
