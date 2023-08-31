@@ -42,7 +42,7 @@ function CompanyListRows(companyList) {
                         <th scope="row" className="col-1 text-center px-3 py-2">
                             <div className="row flex-column justify-content-center align-content-center">
                                 <div className="col">
-                                    <img src={option.image} width="100%" onError={(e) => (
+                                    <img alt={option.symbol} src={option.image} width="100%" onError={(e) => (
                                         e.target.src = "/not-found.svg"
                                     )}/>
                                 </div>
@@ -59,11 +59,11 @@ function CompanyListRows(companyList) {
                             </div>
                             <div className="row">
                                 <div className="col">
-                                                <span className="px-1">
-                                                            {option.price === undefined ? "" : `$${option.price}`}
-                                                    <HumanizedPercentage
-                                                        number={option.changesPercentage === undefined ? "" : option.changesPercentage}/>
-                                                </span>
+                                    <span className="px-1">
+                                        {option.price === undefined ? "" : `$${option.price}`}
+                                        <HumanizedPercentage
+                                            number={option.changesPercentage === undefined ? "" : option.changesPercentage}/>
+                                    </span>
                                 </div>
                             </div>
                         </td>
