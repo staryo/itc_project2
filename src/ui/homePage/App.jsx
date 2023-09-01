@@ -3,6 +3,7 @@ import SearchString from "./SearchString.jsx"
 import React from "react";
 import CompanyList from "./CompanyList.jsx";
 import StockMarquee from "./StockMarquee.jsx";
+import {Link} from "react-router-dom";
 
 function App() {
     const [list, setList] = React.useState([]);
@@ -19,6 +20,7 @@ function App() {
                 <div className="col">
                     <div className="p-3 rounded-2 box border">
                         <SearchString setList={setList}/>
+                        <Link to="/compare/AAPL/GOOGL">test</Link>
                     </div>
                 </div>
             </div>
