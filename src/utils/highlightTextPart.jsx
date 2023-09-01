@@ -1,6 +1,5 @@
 export default function highlightTextPart(string, substring) {
     const indexNumber = string.toLowerCase().indexOf(substring.toLowerCase())
-    console.log(string, substring)
     if (string.length < substring.length) return string
     if (indexNumber === -1) return string
     if (substring.length === 0) return string
