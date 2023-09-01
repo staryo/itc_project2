@@ -1,6 +1,7 @@
 import {useNavigate} from "react-router-dom";
 import HumanizedPercentage from "../../utils/humanizedPercentage.jsx";
 import React, {useEffect} from "react";
+import highlightTextPart from "../../utils/highlightTextPart.jsx";
 
 const errorMessage = [{
     symbol: 'ERROR',
@@ -34,7 +35,7 @@ function CompanyListRows(companyList) {
                         }`
                     } onClick={() => {
                         if (option.symbol !== 'ERROR') {
-                            handleSubmitfunc(
+                            return handleSubmitfunc(
                                 `company/${option.symbol}?search=${queryParameters.get("search")}`
                             )
                         }
@@ -48,14 +49,14 @@ function CompanyListRows(companyList) {
                                         )}/>
                                 </div>
                                 <div className="col">
-                                    {option.symbol}
+                                    {highlightTextPart(option.symbol, queryParameters.get('search'))}
                                 </div>
                             </div>
                         </th>
                         <td className="col-5 text-center px-3 py-2">
                             <div className="row">
                                 <div className="col">
-                                    {option.name}
+                                    {highlightTextPart(option.name, queryParameters.get('search'))}
                                 </div>
                             </div>
                             <div className="row">
