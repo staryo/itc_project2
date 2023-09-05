@@ -3,10 +3,18 @@ import SearchString from "./SearchString.jsx"
 import React from "react";
 import CompanyList from "./CompanyList.jsx";
 import StockMarquee from "./StockMarquee.jsx";
-import {Link} from "react-router-dom";
+import CompareContainer from "./CompareContainer.jsx";
 
 function App() {
     const [list, setList] = React.useState([]);
+    const [compareList, setCompareList] = React.useState(new Set());
+
+    function addSymbolInCompareList(symbol) {
+        setCompareList((current) => {
+            return new Set([...current, symbol])
+        })
+    }
+
     return (
         <>
             <div className="row w-100">
@@ -19,14 +27,14 @@ function App() {
             <div className="row w-100 mb-sm-5 mb-2">
                 <div className="col">
                     <div className="p-3 rounded-2 box border">
+                        <CompareContainer symbols={compareList}/>
                         <SearchString setList={setList}/>
-                        <Link to="/compare/AAPL/GOOGL">test</Link>
                     </div>
                 </div>
             </div>
 
             <div className="row w-100 mt-sm-5 mt-2">
-                <CompanyList>{list}</CompanyList>
+                <CompanyList companyList={list} setCompareList={addSymbolInCompareList}/>
             </div>
         </>
     )

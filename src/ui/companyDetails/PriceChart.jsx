@@ -66,14 +66,16 @@ export const options = {
 
 
 export function PriceChart(priceData) {
-    let labels = [];
+    const sortObject = obj => Object.keys(obj).sort().reduce((res, key) => (res[key] = obj[key], res), {});
     let dataForChart = [];
     if (priceData.history.historical != undefined) {
-        labels = priceData.history.historical.map((i) => i.date).reverse()
-        dataForChart = priceData.history.historical.map((i) => i.close).reverse()
+        // labels = priceData.history.historical.map((i) => i.date).reverse()
+        dataForChart = sortObject(
+            Object.fromEntries(priceData.history.historical.map((i) => [i.date, i.close]))
+        )
     }
     const data = {
-        labels,
+        // labels,
         datasets: [
             {
                 data: dataForChart,

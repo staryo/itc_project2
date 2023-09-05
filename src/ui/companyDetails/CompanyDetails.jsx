@@ -2,25 +2,33 @@ import HumanizedPercentage from "../../utils/humanizedPercentage.jsx";
 import {Link} from "react-router-dom";
 import {useEffect, useState} from "react";
 
+const notFound = {
+    image: "/not-found.svg",
+    companyName: "NOT FOUND",
+    price: "",
+    changesPercentage: ""
+}
+
 function CompanyDetails(details) {
     const queryParameters = new URLSearchParams(window.location.search)
-    const [companyData, updateCompanyData] = useState({
-        image: "/not-found.svg",
-        companyName: "NOT FOUND",
-        price: "",
-        changesPercentage: ""
-    })
-    const [description, updateDescription] = useState("Description is absent");
+    const [companyData, updateCompanyData] = useState({})
+    const [description, updateDescription] = useState("");
     let profileObject;
     profileObject = details.profile.profile
     useEffect(() => {
         if (profileObject !== undefined) {
             if (profileObject.description !== null) {
                 updateDescription(profileObject.description.replace(/(.{500})..+/, "$1..."))
+            } else {
+                updateDescription("Description is absent")
             }
             updateCompanyData(profileObject)
+        } else {
+            updateCompanyData(notFound)
+            updateDescription("Description is absent")
         }
     }, [details])
+    // console.log(details)
     return (
         <>
             <div className="row justify-content-start">
@@ -30,8 +38,6 @@ function CompanyDetails(details) {
                              return {...current, image: "/not-found.svg"}
                          })}
                     />
-
-                    {/*<img src={profileObject.image} width="100%"/>*/}
                 </div>
                 <div className="col-8 d-flex flex-column justify-content-center">
                     <p className="text-white h1">{companyData.companyName}</p>
@@ -41,7 +47,7 @@ function CompanyDetails(details) {
                     </p>
                 </div>
                 <div className="col-2">
-                    <Link to={`/?search=${queryParameters.get("search")}`}>
+                    <Link to={queryParameters.get("search") === null ? '/': `/?search=${queryParameters.get("search")}`}>
                         <img src={"/back.svg"} width={"100%"}/>
                     </Link>
                 </div>

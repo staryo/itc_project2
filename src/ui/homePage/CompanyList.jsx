@@ -1,11 +1,7 @@
 import CompanyListRows from "./CompanyListRows.jsx";
-import React, {useEffect} from "react";
+import React from "react";
 
-function CompanyList(companyList) {
-    const [list, setList] = React.useState([]);
-    useEffect(() => {
-        setList(companyList.children)
-    }, [companyList])
+function CompanyList(props) {
     return (
         <>
             <div className="col-12">
@@ -15,13 +11,13 @@ function CompanyList(companyList) {
                         <thead className="bg-transparent">
                         <tr>
                             <th className="col-1 text-center" scope="col">Symbol</th>
-                            <th className="col-5 text-center" scope="col">Name</th>
+                            <th className="col text-center" scope="col">Name</th>
                             <th className="col-2 text-center d-none d-lg-table-cell" scope="col">Currency</th>
-                            <th className="col-4 text-center d-none d-lg-table-cell" scope="col">stockExchange</th>
+                            <th className="col-2 text-center d-none d-lg-table-cell" scope="col"></th>
                         </tr>
                         </thead>
                         <tbody id="table-content" className="bg-transparent">
-                        <CompanyListRows>{list}</CompanyListRows>
+                        <CompanyListRows companyList={props.companyList} setCompareList={props.setCompareList}/>
                         </tbody>
                     </table>
                 </div>

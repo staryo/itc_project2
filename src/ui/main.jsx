@@ -18,6 +18,10 @@ const router = createBrowserRouter([
     {
         path: "company/:companyID",
         element: <Company/>,
+    },
+    {
+        path: "compare/",
+        element: <Compare/>,
     }
 ]);
 

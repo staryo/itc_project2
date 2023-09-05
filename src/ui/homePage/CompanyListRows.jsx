@@ -9,17 +9,17 @@ const errorMessage = [{
     image: '/not-found.svg'
 }]
 
-function CompanyListRows(companyList) {
-    const queryParameters = new URLSearchParams(window.location.search)
+function CompanyListRows(props) {
+    const queryParametersSearch = new URLSearchParams(window.location.search)
     const navigate = useNavigate()
     const [optionsList, setList] = React.useState(errorMessage);
     useEffect(() => {
-        if (companyList.children.length > 0) {
-            setList(companyList.children)
+        if (props.companyList.length > 0) {
+            setList(props.companyList)
         } else {
             setList(errorMessage)
         }
-    }, [companyList])
+    }, [props.companyList])
 
     async function handleSubmitfunc(route) {
         await navigate(route);
@@ -29,18 +29,16 @@ function CompanyListRows(companyList) {
         <>
             {
                 optionsList.map(option => (
-                    <tr key={option.symbol} className={
-                        `bg-transparent p-5 border-bottom ${
+                    <tr key={option.symbol} className="bg-transparent p-5 border-bottom">
+                        <th scope="row" className={`col-1 text-center px-3 py-2 ${
                             option.symbol !== 'ERROR' ? "link-row" : ""
-                        }`
-                    } onClick={() => {
-                        if (option.symbol !== 'ERROR') {
-                            return handleSubmitfunc(
-                                `company/${option.symbol}?search=${queryParameters.get("search")}`
-                            )
-                        }
-                    }}>
-                        <th scope="row" className="col-1 text-center px-3 py-2">
+                        }`} onClick={() => {
+                            if (option.symbol !== 'ERROR') {
+                                return handleSubmitfunc(
+                                    `company/${option.symbol}?search=${queryParametersSearch.get("search")}`
+                                )
+                            }
+                        }}>
                             <div className="row flex-column justify-content-center align-content-center">
                                 <div className="col">
                                     <img alt={option.symbol} src={option.image} width="100%" onError={
@@ -49,14 +47,22 @@ function CompanyListRows(companyList) {
                                         )}/>
                                 </div>
                                 <div className="col">
-                                    {highlightTextPart(option.symbol, queryParameters.get('search'))}
+                                    {highlightTextPart(option.symbol, queryParametersSearch.get('search'))}
                                 </div>
                             </div>
                         </th>
-                        <td className="col-5 text-center px-3 py-2">
+                        <td className={`col text-center px-3 py-2 ${
+                            option.symbol !== 'ERROR' ? "link-row" : ""
+                        }`} onClick={() => {
+                            if (option.symbol !== 'ERROR') {
+                                return handleSubmitfunc(
+                                    `company/${option.symbol}?search=${queryParametersSearch.get("search")}`
+                                )
+                            }
+                        }}>
                             <div className="row">
                                 <div className="col">
-                                    {highlightTextPart(option.name, queryParameters.get('search'))}
+                                    {highlightTextPart(option.name, queryParametersSearch.get('search'))}
                                 </div>
                             </div>
                             <div className="row">
@@ -65,17 +71,30 @@ function CompanyListRows(companyList) {
                                         {option.price === undefined ? "" : `$${option.price}`}
                                         <HumanizedPercentage
                                             number={
-                                            option.changesPercentage === undefined ? "" : option.changesPercentage
-                                        }/>
+                                                option.changesPercentage === undefined ? "" : option.changesPercentage
+                                            }/>
                                     </span>
                                 </div>
                             </div>
                         </td>
-                        <td className="col-2 text-center px-3 py-2 d-none d-lg-table-cell">
+                        <td className={`col-2 text-center px-3 py-2 d-none d-lg-table-cell ${
+                            option.symbol !== 'ERROR' ? "link-row" : ""
+                        }`} onClick={() => {
+                            if (option.symbol !== 'ERROR') {
+                                return handleSubmitfunc(
+                                    `company/${option.symbol}?search=${queryParametersSearch.get("search")}`
+                                )
+                            }
+                        }}>
                             {option.currency}
                         </td>
-                        <td className="col-4 text-center d-none d-lg-table-cell px-3 py-2">
-                            {option.stockExchange}
+                        <td className="col-2 text-center d-none d-lg-table-cell px-3 py-2">
+                            <button className="btn btn-light" onClick={
+                                () => {
+                                    props.setCompareList(option.symbol)
+                                }
+                            }>Compare
+                            </button>
                         </td>
                     </tr>
                 ))

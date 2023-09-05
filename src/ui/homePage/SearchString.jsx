@@ -1,6 +1,5 @@
 import searchCompany from "../../api/getCompanies.js";
 import {useEffect, useState} from "react";
-import Marquee from "react-fast-marquee";
 
 
 function SearchString({setList}) {
@@ -18,6 +17,7 @@ function SearchString({setList}) {
     }, [inputValue]);
 
     useEffect(() => {
+        if (debouncedInputValue === null) return
         setList([{
             symbol: 'WAIT',
             name: 'Loading...',
@@ -37,7 +37,7 @@ function SearchString({setList}) {
                 Search company
             </p>
             <input className="form-control form-control-lg text-center" list="company" name="company"
-                   id="chosen_company" placeholder={"Company name"} value={inputValue} onChange={
+                   id="chosen_company" placeholder={"Company name"} value={inputValue === null? '': inputValue} onChange={
                 (currentValue) => {
                     setInputValue(currentValue.target.value)
                 }

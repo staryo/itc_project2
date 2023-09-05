@@ -1,53 +1,57 @@
 import '../styles.css'
-import {useParams} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 import React, {useEffect} from "react";
 import getCompanyDetails from "../../api/getCompanyDetails.js";
 import getCompanyHistory from "../../api/getCompanyHistory.js";
 import CompanyDetails from "../companyDetails/CompanyDetails.jsx";
-import {PriceChart} from "../companyDetails/PriceChart.jsx";
+import {ComparePriceChart} from "./ComparePriceChart.jsx";
+
 
 function Compare() {
-    const {firstCompanyID, secondCompanyID} = useParams();
-    const [firstProfile, updateFirstProfile] = React.useState({});
-    const [firstHistory, updateFirstHistory] = React.useState({});
-    const [secondProfile, updateSecondProfile] = React.useState({});
-    const [secondHistory, updateSecondHistory] = React.useState({});
+    const queryParameters = new URLSearchParams(window.location.search)
+    const companiesList = queryParameters.get("symbols").split(',')
+    const [profilesList, updateProfile] = React.useState({});
+    const [historiesList, updateHistory] = React.useState([]);
+
+    function addProfile(profile) {
+        profile.profile.description = ''
+        updateProfile((current) => {
+            return {...current, [profile.symbol]: profile}
+        })
+    }
+
+    function addHistory(history) {
+        updateHistory((current) => {
+            return {...current, [history.symbol]: history}
+        })
+    }
+
     useEffect(() => {
-        getCompanyDetails(firstCompanyID, updateFirstProfile)
-        getCompanyHistory(firstCompanyID, updateFirstHistory)
-    }, [firstCompanyID])
-    useEffect(() => {
-        getCompanyDetails(secondCompanyID, updateSecondProfile)
-        getCompanyHistory(secondCompanyID, updateSecondHistory)
-    }, [secondCompanyID])
+        companiesList.map((symbol) => {
+            getCompanyDetails(symbol, addProfile)
+            getCompanyHistory(symbol, addHistory)
+        })
+    }, [])
     return (
         <>
-            <div className="row w-100">
-                <div className="col-xl-6">
+            <div className="row w-100 flex-nowrap">
+                <div className="col">
                     <div className="p-3 rounded-2 box border">
-                        <div className="row">
-                            <div className="col">
-                                <CompanyDetails profile={firstProfile}/>
-                            </div>
+                        <div className="row flex-xl-nowrap">
+                            {companiesList.map((symbol) => {
+                                if (symbol !== "") {
+                                    return (
+                                        <div key={symbol} className="col">
+                                            <CompanyDetails
+                                                profile={symbol in profilesList ? profilesList[symbol] : {}}/>
+                                        </div>
+                                    )
+                                }
+                            })}
                         </div>
-                        <div className="row">
+                        <div className="row flex-nowrap">
                             <div className="col">
-                                <PriceChart history={firstHistory}/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="col-xl-6">
-                    <div className="p-3 rounded-2 box border">
-                        <div className="row">
-                            <div className="col">
-                                <CompanyDetails profile={secondProfile}/>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col">
-                                <PriceChart history={secondHistory}/>
+                                <ComparePriceChart history={historiesList}/>
                             </div>
                         </div>
                     </div>
