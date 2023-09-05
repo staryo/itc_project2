@@ -3,8 +3,9 @@ import 'bootstrap/dist/css/bootstrap.css';
 import React, {useEffect} from "react";
 import getCompanyDetails from "../../api/getCompanyDetails.js";
 import getCompanyHistory from "../../api/getCompanyHistory.js";
-import CompanyDetails from "../companyDetails/CompanyDetails.jsx";
 import {ComparePriceChart} from "./ComparePriceChart.jsx";
+import CompareCompanyDetails from "./CompareCompanyDetails.jsx";
+import {Link} from "react-router-dom";
 
 
 function Compare() {
@@ -37,19 +38,25 @@ function Compare() {
             <div className="row w-100 flex-nowrap">
                 <div className="col">
                     <div className="p-3 rounded-2 box border">
-                        <div className="row flex-xl-nowrap">
+                        <div className="row flex-md-row flex-column flex-md-nowrap">
                             {companiesList.map((symbol) => {
                                 if (symbol !== "") {
                                     return (
-                                        <div key={symbol} className="col">
-                                            <CompanyDetails
+                                        <div key={symbol} className="col py-2">
+                                            <CompareCompanyDetails
                                                 profile={symbol in profilesList ? profilesList[symbol] : {}}/>
                                         </div>
                                     )
                                 }
                             })}
+                            <div className="col-1 d-md-flex d-none">
+                                <Link
+                                    to={queryParameters.get("search") === null ? '/' : `/?search=${queryParameters.get("search")}&symbols=${queryParameters.get("symbols")}`}>
+                                    <img src={"/back.svg"} width={"100%"}/>
+                                </Link>
+                            </div>
                         </div>
-                        <div className="row flex-nowrap">
+                        <div className="row">
                             <div className="col">
                                 <ComparePriceChart history={historiesList}/>
                             </div>

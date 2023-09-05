@@ -1,5 +1,4 @@
 import CompanyListRows from "./CompanyListRows.jsx";
-import React from "react";
 
 function CompanyList(props) {
     return (
@@ -17,7 +16,11 @@ function CompanyList(props) {
                         </tr>
                         </thead>
                         <tbody id="table-content" className="bg-transparent">
-                        <CompanyListRows companyList={props.companyList} setCompareList={props.setCompareList}/>
+                        <CompanyListRows
+                            companyList={props.companyList}
+                            setCompareList={props.setCompareList}
+                            compareList={[...props.compareList]}
+                        />
                         </tbody>
                     </table>
                 </div>

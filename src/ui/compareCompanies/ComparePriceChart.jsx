@@ -65,21 +65,17 @@ export const options = {
     }
 };
 
-const color = ['rgb(255, 255, 255)', 'rgb(255, 0, 255)', 'rgb(255, 255, 0)']
+const color = ['rgb(255, 255, 255)', 'rgb(255, 0, 255)', 'rgb(255, 255, 0)', 'rgb(0, 255, 0)']
 
 export function ComparePriceChart(priceData) {
-    const sortObject = obj => Object.keys(obj).sort().reduce((res, key) => (res[key] = obj[key], res), {});
     let dataForChart = {};
-    let labels = {};
+    let labels = [];
     Object.keys(priceData.history).map((key) => {
-        const new_labels = Object.fromEntries(priceData.history[key].historical.map((i) => [i.date, '']))
-        labels = {...labels, new_labels}
-        dataForChart[key] = sortObject(
-            Object.fromEntries(priceData.history[key].historical.map((i) => [i.date, i.close]))
-        )
+        const new_labels = new Set(priceData.history[key].historical.map((i) => i.date))
+        labels = [...labels, ...new_labels].sort()
+        dataForChart[key] = Object.fromEntries(priceData.history[key].historical.map((i) => [i.date, i.close]))
     })
-    if (labels.new_labels !== undefined) labels = sortObject(labels.new_labels)
-    labels = Object.keys(labels).slice(-200)
+    labels = labels.slice(-1000)
     let valuesForChart = {};
     Object.keys(priceData.history).map((key) => {
         valuesForChart[key] = labels.map((date) => dataForChart[key][date])

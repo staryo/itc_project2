@@ -29,7 +29,9 @@ export default function CompareContainer(props) {
                     Compare
                 </button>
                 {symbolsList.map((symbol) => (
-                    <button className="btn btn-outline-danger px-5 mx-3" key={symbol}>
+                    <button className="btn btn-outline-danger px-5 mx-3" key={symbol} onClick={() => {
+                        props.remove(symbol)
+                    }}>
                         {symbol}
                     </button>
                 ))}
