@@ -11,7 +11,7 @@ function App() {
     useEffect(() => {
         if (queryParameters.get("symbols") != null) {
             setCompareList(
-                queryParameters.get("symbols").split(',')
+                new Set(queryParameters.get("symbols").split(','))
             )
         }
     }, []);
