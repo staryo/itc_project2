@@ -38,7 +38,7 @@ function App() {
                     </div>
                 </div>
             </div>
-            <div className="row w-100 mb-sm-5 mb-2">
+            <div className="row w-100 mb-sm-3 mb-2">
                 <div className="col">
                     <div className="p-3 rounded-2 box border">
                         <SearchString setList={setList}/>
@@ -49,7 +49,7 @@ function App() {
                 </div>
             </div>
 
-            <div className="row w-100 mt-sm-5 mt-2">
+            <div className="row w-100 mt-sm-3 mt-2">
                 <CompanyList companyList={list} setCompareList={addSymbolInCompareList} compareList={compareList}/>
             </div>
         </>
