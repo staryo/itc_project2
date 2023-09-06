@@ -1,4 +1,11 @@
 import CompanyListRows from "./CompanyListRows.jsx";
+import PropTypes from "prop-types";
+
+CompanyList.propTypes = {
+    companyList: PropTypes.object,
+    setCompareList: PropTypes.func,
+    compareList: PropTypes.array
+}
 
 function CompanyList(props) {
     return (
