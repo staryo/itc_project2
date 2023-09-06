@@ -18,7 +18,7 @@ export default function CompareContainer(props) {
         <>
             <div className="col-12">
                 <button className={`btn btn-outline-light px-5 mx-3 ${
-                    symbolsList.length === 1 ? "disabled" : ""
+                    symbolsList.length < 2 ? "disabled" : ""
                 }`} onClick={() => {
                     if (symbolsList.length > 1) {
                         return handleSubmitfunc(
