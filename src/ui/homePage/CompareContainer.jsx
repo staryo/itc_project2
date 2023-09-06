@@ -1,5 +1,11 @@
 import React, {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
+import PropTypes from "prop-types";
+
+CompareContainer.propTypes = {
+    symbols: PropTypes.object,
+    remove: PropTypes.func,
+}
 
 export default function CompareContainer(props) {
     const queryParametersSearch = new URLSearchParams(window.location.search)
