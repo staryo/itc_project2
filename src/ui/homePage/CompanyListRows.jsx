@@ -24,6 +24,7 @@ function CompanyListRows(props) {
     async function handleSubmitfunc(route) {
         await navigate(route);
     }
+
     return (
         <>
             {
@@ -107,7 +108,8 @@ function CompanyListRows(props) {
 CompanyListRows.defaultProps = {
     companyList: [],
     compareList: [],
-    setCompareList: (() => {})
+    setCompareList: (() => {
+    })
 }
 
 export default CompanyListRows

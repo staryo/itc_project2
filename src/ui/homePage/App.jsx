@@ -41,10 +41,10 @@ function App() {
             <div className="row w-100 mb-sm-5 mb-2">
                 <div className="col">
                     <div className="p-3 rounded-2 box border">
-                        <div className="d-md-flex d-none">
+                        <SearchString setList={setList}/>
+                        <div className="d-md-flex d-none mt-4">
                             <CompareContainer symbols={compareList} remove={removeSymbolFromCompareList}/>
                         </div>
-                        <SearchString setList={setList}/>
                     </div>
                 </div>
             </div>
