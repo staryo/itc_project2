@@ -2,9 +2,9 @@ import CompanyListRows from "./CompanyListRows.jsx";
 import PropTypes from "prop-types";
 
 CompanyList.propTypes = {
-    companyList: PropTypes.object,
+    companyList: PropTypes.array,
     setCompareList: PropTypes.func,
-    compareList: PropTypes.array
+    compareList: PropTypes.object
 }
 
 function CompanyList(props) {

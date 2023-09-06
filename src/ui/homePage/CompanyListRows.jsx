@@ -4,6 +4,7 @@ import React, {useEffect} from "react";
 import highlightTextPart from "../../utils/highlightTextPart.jsx";
 import CompareButton from "./CompareButton.jsx";
 import PropTypes from "prop-types";
+import SymbolAndLogo from "./SymbolAndLogo.jsx";
 
 const errorMessage = [{
     symbol: 'ERROR',
@@ -12,7 +13,7 @@ const errorMessage = [{
 }]
 
 CompanyListRows.propTypes = {
-    companyList: PropTypes.object,
+    companyList: PropTypes.array,
     setCompareList: PropTypes.func,
     compareList: PropTypes.array
 }
@@ -33,35 +34,14 @@ function CompanyListRows(props) {
         await navigate(route);
     }
 
+    // TODO: Divide render to several functions
     return (
         <>
             {
                 optionsList.map(option => (
                     <tr key={option.symbol} className="bg-transparent p-5 border-bottom">
 
-                        {/*Symbols and logo*/}
-                        <th scope="row" className={`col-1 text-center px-3 py-2 ${
-                            option.symbol !== 'ERROR' ? "link-row" : ""
-                        }`} onClick={() => {
-                            if (option.symbol !== 'ERROR') {
-                                return handleSubmitfunc(
-                                    `company/${option.symbol}?search=${queryParametersSearch.get("search")}`
-                                )
-                            }
-                        }}>
-                            <div className="row flex-column justify-content-center align-content-center">
-                                <div className="col">
-                                    <img alt={option.symbol} src={option.image} width="100%" onError={
-                                        (e) => (
-                                            e.target.src = "/not-found.svg"
-                                        )}/>
-                                </div>
-                                <div className="col">
-                                    {highlightTextPart(option.symbol, queryParametersSearch.get('search'))}
-                                </div>
-                            </div>
-                        </th>
-                        {/*Symbols and logo*/}
+                        <SymbolAndLogo symbol={option.symbol} image={option.image} />
 
                         {/*Company name and price*/}
                         <td className={`col text-center px-3 py-2 ${
@@ -107,7 +87,7 @@ function CompanyListRows(props) {
                         {/*Currency*/}
 
                         <CompareButton
-                            setCompareList={props.setCompareList} s
+                            setCompareList={props.setCompareList}
                             symbol={option.symbol}
                             currentNumber={props.compareList.length}
                         />

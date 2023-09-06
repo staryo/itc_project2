@@ -1,6 +1,10 @@
 import searchCompany from "../../api/getCompanies.js";
 import {useEffect, useState} from "react";
+import PropTypes from "prop-types";
 
+SearchString.propTypes = {
+    setList: PropTypes.func,
+}
 
 function SearchString({setList}) {
     const queryParameters = new URLSearchParams(window.location.search)
@@ -37,11 +41,12 @@ function SearchString({setList}) {
                 Search company
             </p>
             <input className="form-control form-control-lg text-center" list="company" name="company"
-                   id="chosen_company" placeholder={"Company name"} value={inputValue === null? '': inputValue} onChange={
-                (currentValue) => {
-                    setInputValue(currentValue.target.value)
-                }
-            }/>
+                   id="chosen_company" placeholder={"Company name"} value={inputValue === null ? '' : inputValue}
+                   onChange={
+                       (currentValue) => {
+                           setInputValue(currentValue.target.value)
+                       }
+                   }/>
         </>
     )
 }

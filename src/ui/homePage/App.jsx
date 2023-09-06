@@ -8,13 +8,13 @@ import CompareContainer from "./CompareContainer.jsx";
 function App() {
     const queryParameters = new URLSearchParams(window.location.search)
     const [compareList, setCompareList] = React.useState(new Set());
-
     useEffect(() => {
         if (queryParameters.get("symbols") != null) {
-            setCompareList(queryParameters.get("symbols").split(','))
+            setCompareList(
+                queryParameters.get("symbols").split(',')
+            )
         }
     }, []);
-
     const [list, setList] = React.useState([]);
 
     function addSymbolInCompareList(symbol) {
