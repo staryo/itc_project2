@@ -6,9 +6,9 @@ import StockMarquee from "./StockMarquee.jsx";
 import CompareContainer from "./CompareContainer.jsx";
 
 function App() {
-    const queryParameters = new URLSearchParams(window.location.search)
     const [compareList, setCompareList] = React.useState(new Set());
     useEffect(() => {
+        const queryParameters = new URLSearchParams(window.location.search)
         if (queryParameters.get("symbols") != null) {
             setCompareList(
                 new Set(queryParameters.get("symbols").split(','))

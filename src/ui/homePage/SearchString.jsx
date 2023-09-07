@@ -34,7 +34,7 @@ function SearchString({setList}) {
             null,
             `?search=${debouncedInputValue}`
         );
-    }, [debouncedInputValue]);
+    }, [debouncedInputValue, setList]);
     return (
         <>
             <p className="h1 m-0 p-3 text-center text-white" id="result">

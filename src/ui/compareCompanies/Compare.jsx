@@ -32,7 +32,7 @@ function Compare() {
             getCompanyDetails(symbol, addProfile)
             getCompanyHistory(symbol, addHistory)
         })
-    }, [])
+    }, [companiesList])
     return (
         <>
             <div className="row w-100 flex-nowrap">
@@ -52,7 +52,7 @@ function Compare() {
                             <div className="col-1 d-md-flex d-none">
                                 <Link
                                     to={queryParameters.get("search") === null ? '/' : `/?search=${queryParameters.get("search")}&symbols=${queryParameters.get("symbols")}`}>
-                                    <img src={"/back.svg"} width={"100%"}/>
+                                    <img src={"/back.svg"} width={"100%"} alt="back"/>
                                 </Link>
                             </div>
                         </div>

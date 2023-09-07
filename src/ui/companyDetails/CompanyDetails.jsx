@@ -27,7 +27,7 @@ function CompanyDetails(details) {
             updateCompanyData(notFound)
             updateDescription("Description is absent")
         }
-    }, [details])
+    }, [details, profileObject])
     // console.log(details)
     return (
         <>
@@ -37,7 +37,7 @@ function CompanyDetails(details) {
                          onError={() => updateCompanyData(current => {
                              return {...current, image: "/not-found.svg"}
                          })}
-                    />
+                     alt={companyData.symbol}/>
                 </div>
                 <div className="col-8 d-flex flex-column justify-content-center">
                     <p className="text-white h1">{companyData.companyName}</p>
@@ -48,7 +48,7 @@ function CompanyDetails(details) {
                 </div>
                 <div className="col-2">
                     <Link to={queryParameters.get("search") === null ? '/': `/?search=${queryParameters.get("search")}`}>
-                        <img src={"/back.svg"} width={"100%"}/>
+                        <img src={"/back.svg"} width={"100%"} alt="back"/>
                     </Link>
                 </div>
             </div>

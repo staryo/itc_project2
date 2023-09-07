@@ -10,9 +10,8 @@ const notFound = {
 
 export default function CompareCompanyDetails(details) {
     const [companyData, updateCompanyData] = useState({})
-    let profileObject = {};
-    profileObject = details.profile.profile
     useEffect(() => {
+        const profileObject = details.profile.profile
         if (profileObject !== undefined) {
             updateCompanyData({...profileObject, ...{symbol: details.profile.symbol}})
         } else {
@@ -27,7 +26,7 @@ export default function CompareCompanyDetails(details) {
                          onError={() => updateCompanyData(current => {
                              return {...current, image: "/not-found.svg"}
                          })}
-                    />
+                     alt={companyData.symbol}/>
                 </div>
                 <div className="col-9 h-100">
                     <div className="row flex-column">
