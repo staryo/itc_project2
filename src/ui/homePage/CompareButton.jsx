@@ -14,7 +14,7 @@ export default function CompareButton(props) {
                 <button className={`btn btn-light ${
                     props.currentNumber >= 4 ? "d-none" : ""
                 } ${
-                    props.symbol in ['ERROR', 'WAIT'] ? "d-none" : ""
+                    ['ERROR', 'WAIT'].includes(props.symbol) ? "d-none" : ""
                 }`} onClick={
                     () => {
                         props.setCompareList(props.symbol)
