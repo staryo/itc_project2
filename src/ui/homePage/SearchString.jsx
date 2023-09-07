@@ -41,7 +41,7 @@ function SearchString({setList}) {
                 Search company
             </p>
             <input className="form-control form-control-lg text-center" list="company" name="company"
-                   id="chosen_company" placeholder={"Company name"} value={inputValue === null ? '' : inputValue}
+                   id="chosen_company" placeholder={"Type company name to find it"} value={inputValue === null ? '' : inputValue}
                    onChange={
                        (currentValue) => {
                            setInputValue(currentValue.target.value)
