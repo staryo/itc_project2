@@ -10,7 +10,7 @@ CompanyNameAndPrice.propTypes = {
     changesPercentage: PropTypes.string
 }
 
-export default function CompanyNameAndPrice(props) {
+export default function CompanyNameAndPrice({symbol, name, price, changesPercentage}) {
     const queryParametersSearch = new URLSearchParams(window.location.search)
     const navigate = useNavigate()
 
@@ -22,26 +22,26 @@ export default function CompanyNameAndPrice(props) {
         <>
             {/*Company name and price*/}
             <td className={`col text-center px-3 py-2 ${
-                props.symbol !== 'ERROR' ? "link-row" : ""
+                symbol !== 'ERROR' ? "link-row" : ""
             }`} onClick={() => {
-                if (props.symbol !== 'ERROR') {
+                if (symbol !== 'ERROR') {
                     return handleSubmitfunc(
-                        `company/${props.symbol}?search=${queryParametersSearch.get("search")}`
+                        `company/${symbol}?search=${queryParametersSearch.get("search")}`
                     )
                 }
             }}>
                 <div className="row">
                     <div className="col">
-                        {highlightTextPart(props.name, queryParametersSearch.get('search'))}
+                        {highlightTextPart(name, queryParametersSearch.get('search'))}
                     </div>
                 </div>
                 <div className="row">
                     <div className="col">
                                     <span className="px-1">
-                                        {props.price === undefined ? "" : `$${props.price}`}
+                                        {price === undefined ? "" : `$${price}`}
                                         <HumanizedPercentage
                                             number={
-                                                props.changesPercentage === undefined ? "" : props.changesPercentage
+                                                changesPercentage === undefined ? "" : changesPercentage
                                             }/>
                                     </span>
                     </div>

@@ -7,7 +7,7 @@ CompanyList.propTypes = {
     compareList: PropTypes.object
 }
 
-function CompanyList(props) {
+function CompanyList({companyList, setCompareList, compareList}) {
     return (
         <>
             <div className="col-12">
@@ -24,9 +24,9 @@ function CompanyList(props) {
                         </thead>
                         <tbody id="table-content" className="bg-transparent">
                         <CompanyListRows
-                            companyList={props.companyList}
-                            setCompareList={props.setCompareList}
-                            compareList={[...props.compareList]}
+                            companyList={companyList}
+                            setCompareList={setCompareList}
+                            compareList={[...compareList]}
                         />
                         </tbody>
                     </table>

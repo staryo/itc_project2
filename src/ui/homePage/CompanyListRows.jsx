@@ -17,15 +17,15 @@ CompanyListRows.propTypes = {
     compareList: PropTypes.array
 }
 
-function CompanyListRows(props) {
+function CompanyListRows({companyList, setCompareList, compareList}) {
     const [optionsList, setList] = React.useState(errorMessage);
     useEffect(() => {
-        if (props.companyList.length > 0) {
-            setList(props.companyList)
+        if (companyList.length > 0) {
+            setList(companyList)
         } else {
             setList(errorMessage)
         }
-    }, [props.companyList])
+    }, [companyList])
 
     return (
         <>
@@ -45,9 +45,9 @@ function CompanyListRows(props) {
                         <Currency symbol={option.symbol} currency={option.currency}/>
 
                         <CompareButton
-                            setCompareList={props.setCompareList}
+                            setCompareList={setCompareList}
                             symbol={option.symbol}
-                            currentNumber={props.compareList.length}
+                            currentNumber={compareList.length}
                         />
 
                     </tr>

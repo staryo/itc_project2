@@ -7,14 +7,14 @@ CompareContainer.propTypes = {
     remove: PropTypes.func,
 }
 
-export default function CompareContainer(props) {
+export default function CompareContainer({symbols, remove}) {
     const queryParametersSearch = new URLSearchParams(window.location.search)
     const navigate = useNavigate()
-    const [symbolsList, setList] = React.useState([...props.symbols]);
+    const [symbolsList, setList] = React.useState([...symbols]);
 
     useEffect(() => {
-        setList([...props.symbols])
-    }, [props]);
+        setList([...symbols])
+    }, [symbols]);
 
     async function handleSubmitfunc(route) {
         await navigate(route);
@@ -36,7 +36,7 @@ export default function CompareContainer(props) {
                 </button>
                 {symbolsList.map((symbol) => (
                     <button className="btn btn-outline-danger px-5 mx-3" key={symbol} onClick={() => {
-                        props.remove(symbol)
+                        remove(symbol)
                     }}>
                         {symbol}
                     </button>

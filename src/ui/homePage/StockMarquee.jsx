@@ -18,7 +18,13 @@ function StockMarquee() {
                 <div className="col">
                     <Marquee className="text-white">
                         {topCompanies.map((company =>
-                                <StockMarqueeListElement key={company.symbol} company={company}/>
+                                <StockMarqueeListElement
+                                    key={company.symbol}
+                                    name={company.name}
+                                    symbol={company.symbol}
+                                    price={company.price}
+                                    changesPercentage={company.changesPercentage}
+                                />
                         ))}
                     </Marquee>
                 </div>

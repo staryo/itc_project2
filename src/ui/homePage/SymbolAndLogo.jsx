@@ -7,7 +7,7 @@ SymbolAndLogo.propTypes = {
     image: PropTypes.string
 }
 
-export default function SymbolAndLogo(props) {
+export default function SymbolAndLogo({symbol, image}) {
     const queryParametersSearch = new URLSearchParams(window.location.search)
     const navigate = useNavigate()
 
@@ -19,23 +19,23 @@ export default function SymbolAndLogo(props) {
         <>
             {/*Symbols and logo*/}
             <th scope="row" className={`col-1 text-center px-3 py-2 ${
-                props.symbol !== 'ERROR' ? "link-row" : ""
+                symbol !== 'ERROR' ? "link-row" : ""
             }`} onClick={() => {
-                if (props.symbol !== 'ERROR') {
+                if (symbol !== 'ERROR') {
                     return handleSubmitfunc(
-                        `company/${props.symbol}?search=${queryParametersSearch.get("search")}`
+                        `company/${symbol}?search=${queryParametersSearch.get("search")}`
                     )
                 }
             }}>
                 <div className="row flex-column justify-content-center align-content-center">
                     <div className="col">
-                        <img alt={props.symbol} src={props.image} width="100%" onError={
+                        <img alt={symbol} src={image} width="100%" onError={
                             (e) => (
                                 e.target.src = "/not-found.svg"
                             )}/>
                     </div>
                     <div className="col">
-                        {highlightTextPart(props.symbol, queryParametersSearch.get('search'))}
+                        {highlightTextPart(symbol, queryParametersSearch.get('search'))}
                     </div>
                 </div>
             </th>

@@ -2,20 +2,23 @@ import HumanizedPercentage from "../../utils/humanizedPercentage.jsx";
 import PropTypes from "prop-types";
 
 StockMarqueeListElement.propTypes = {
-    company: PropTypes.object,
+    name: PropTypes.string,
+    symbol: PropTypes.string,
+    price: PropTypes.number,
+    changesPercentage: PropTypes.string,
 }
 
-export default function StockMarqueeListElement(props) {
+export default function StockMarqueeListElement({name, symbol, price, changesPercentage}) {
     return (
-        <div key={props.company.symbol} className="px-4">
-            {props.company.name === undefined ? '' : props.company.name}
-            {props.company.symbol === '' ? '' : `(${props.company.symbol})`}
+        <div key={symbol} className="px-4">
+            {name === undefined ? '' : name}
+            {symbol === '' ? '' : `(${symbol})`}
             <span className="px-2">
-                {props.company.price === undefined ? '' : `$${props.company.price}`}
+                {price === undefined ? '' : `$${price}`}
             </span>
             <HumanizedPercentage
                 number={
-                    props.company.changesPercentage === undefined ? "" : props.company.changesPercentage
+                    changesPercentage === undefined ? "" : changesPercentage
                 }/>
         </div>
     )

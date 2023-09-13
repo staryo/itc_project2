@@ -17,8 +17,9 @@ async function getDetailsForListOfCompanies(list) {
     const chunkedList = await chunkCompanyList(companyList)
     await Promise.all(await chunkedList.map(async (requestQueue) => {
         await getCompanyDetails(requestQueue, (response) => {
+            /// If request was only for one company, there will be a little bit different answer
             if ('companyProfiles' in response) {
-                response.companyProfiles.map(oneCompany => {
+                response.companyProfiles.forEach(oneCompany => {
                     newData[oneCompany.symbol] = {
                         image: oneCompany.profile.image,
                         price: oneCompany.profile.price,
@@ -34,7 +35,7 @@ async function getDetailsForListOfCompanies(list) {
             }
         })
     }))
-    await list.map(async (row) => {
+    await list.forEach((row) => {
         try {
             Object.assign(row, {
                 image: newData[row.symbol].image,

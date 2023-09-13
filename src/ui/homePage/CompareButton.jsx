@@ -6,18 +6,18 @@ CompareButton.propTypes = {
     symbol: PropTypes.string
 }
 
-export default function CompareButton(props) {
+export default function CompareButton({currentNumber, setCompareList, symbol}) {
     return (
         <>
             {/*Compare button*/}
             <td className="col-2 text-center d-none d-lg-table-cell px-3 py-2">
                 <button className={`btn btn-light ${
-                    props.currentNumber >= 4 ? "d-none" : ""
+                    currentNumber >= 4 ? "d-none" : ""
                 } ${
-                    ['ERROR', 'WAIT'].includes(props.symbol) ? "d-none" : ""
+                    ['ERROR', 'WAIT'].includes(symbol) ? "d-none" : ""
                 }`} onClick={
                     () => {
-                        props.setCompareList(props.symbol)
+                        setCompareList(symbol)
                     }
                 }>Compare
                 </button>
