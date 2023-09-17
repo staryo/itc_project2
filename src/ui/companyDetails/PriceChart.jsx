@@ -21,6 +21,6 @@ export function PriceChart(priceData) {
         ],
     };
     return (
-        <Line options={Options} data={data} width={"100%"} height={"40%"}/>
+        <Line options={Options} data={data} width={"100%"} height={"300px"}/>
     );
 }

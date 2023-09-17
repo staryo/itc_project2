@@ -1,5 +1,6 @@
 export const Options = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
         legend: {
             display: true,

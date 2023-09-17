@@ -1,4 +1,4 @@
-import CompanyListRows from "./CompanyListRows.jsx";
+import CompanyListRows from "./CompanyListRow.jsx";
 import PropTypes from "prop-types";
 
 CompanyList.propTypes = {

@@ -8,9 +8,10 @@ import CompareCompanyDetails from "./CompareCompanyDetails.jsx";
 import {Link} from "react-router-dom";
 
 
+
 function Compare() {
     const queryParameters = new URLSearchParams(window.location.search);
-    const companiesList = queryParameters.get("symbols").split(",");
+    const [companiesList, updateCompaniesList] = React.useState(queryParameters.get("symbols").split(","));
     const [profilesList, updateProfile] = React.useState({});
     const [historiesList, updateHistory] = React.useState([]);
 
@@ -33,6 +34,7 @@ function Compare() {
             getCompanyHistory(symbol, addHistory);
         });
     }, [companiesList]);
+
     return (
         <>
             <div className="row w-100 flex-nowrap">

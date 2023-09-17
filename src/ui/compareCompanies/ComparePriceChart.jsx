@@ -26,6 +26,6 @@ export function ComparePriceChart(priceData) {
     ))
 
     return (
-        <Line options={Options} data={data} width={"100%"} height={"50%"}/>
+        <Line options={Options} data={data} width={"100%"} height={"400px"}/>
     );
 }
