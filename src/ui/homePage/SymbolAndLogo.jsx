@@ -18,7 +18,7 @@ export default function SymbolAndLogo({symbol, image}) {
     return (
         <>
             {/*Symbols and logo*/}
-            <th scope="row" className={`col-1 text-center px-3 py-2 ${
+            <th scope="row" className={`col-lg-1 col-sm-2 col-3 text-center px-3 py-2 ${
                 symbol !== 'ERROR' ? "link-row" : ""
             }`} onClick={() => {
                 if (symbol !== 'ERROR') {
@@ -32,7 +32,7 @@ export default function SymbolAndLogo({symbol, image}) {
                         <img alt={symbol} src={image} width="100%" onError={
                             (e) => (
                                 e.target.src = "/not-found.svg"
-                            )} loading="lazy"/>
+                            )} loading="lazy" />
                     </div>
                     <div className="col">
                         {highlightTextPart(symbol, queryParametersSearch.get('search'))}

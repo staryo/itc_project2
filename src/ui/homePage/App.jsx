@@ -1,5 +1,5 @@
-import '../styles.css'
-import SearchString from "./SearchString.jsx"
+import "../styles.css";
+import SearchString from "./SearchString.jsx";
 import React, {useEffect} from "react";
 import CompanyList from "./CompanyList.jsx";
 import StockMarquee from "./StockMarquee.jsx";
@@ -8,25 +8,25 @@ import CompareContainer from "./CompareContainer.jsx";
 function App() {
     const [compareList, setCompareList] = React.useState(new Set());
     useEffect(() => {
-        const queryParameters = new URLSearchParams(window.location.search)
+        const queryParameters = new URLSearchParams(window.location.search);
         if (queryParameters.get("symbols") != null) {
             setCompareList(
-                new Set(queryParameters.get("symbols").split(','))
-            )
+                new Set(queryParameters.get("symbols").split(","))
+            );
         }
     }, []);
     const [list, setList] = React.useState([]);
 
     function addSymbolInCompareList(symbol) {
         setCompareList((current) => {
-            return new Set([...current, symbol])
-        })
+            return new Set([...current, symbol]);
+        });
     }
 
     function removeSymbolFromCompareList(symbol) {
         setCompareList((current) => {
-            return new Set([...current].filter((element) => element !== symbol))
-        })
+            return new Set([...current].filter((element) => element !== symbol));
+        });
     }
 
     return (
@@ -53,7 +53,7 @@ function App() {
                 <CompanyList companyList={list} setCompareList={addSymbolInCompareList} compareList={compareList}/>
             </div>
         </>
-    )
+    );
 }
 
-export default App
+export default App;

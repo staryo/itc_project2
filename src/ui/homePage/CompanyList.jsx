@@ -16,7 +16,7 @@ function CompanyList({companyList, setCompareList, compareList}) {
                     <table className="table table-hover table-scroll">
                         <thead className="bg-transparent">
                         <tr>
-                            <th className="col-1 text-center" scope="col">Symbol</th>
+                            <th className="col-lg-1 col-sm-2 col-3 text-center" scope="col">Symbol</th>
                             <th className="col text-center" scope="col">Name</th>
                             <th className="col-2 text-center d-none d-lg-table-cell" scope="col">Currency</th>
                             <th className="col-2 text-center d-none d-lg-table-cell" scope="col"></th>
