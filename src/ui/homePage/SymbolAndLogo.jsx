@@ -32,7 +32,7 @@ export default function SymbolAndLogo({symbol, image}) {
                         <img alt={symbol} src={image} width="100%" onError={
                             (e) => (
                                 e.target.src = "/not-found.svg"
-                            )}/>
+                            )} loading="lazy"/>
                     </div>
                     <div className="col">
                         {highlightTextPart(symbol, queryParametersSearch.get('search'))}

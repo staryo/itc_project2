@@ -1,5 +1,5 @@
-import '../styles.css'
-import 'bootstrap/dist/css/bootstrap.css';
+import "../styles.css";
+import "bootstrap/dist/css/bootstrap.css";
 import React, {useEffect} from "react";
 import getCompanyDetails from "../../api/getCompanyDetails.js";
 import getCompanyHistory from "../../api/getCompanyHistory.js";
@@ -9,30 +9,30 @@ import {Link} from "react-router-dom";
 
 
 function Compare() {
-    const queryParameters = new URLSearchParams(window.location.search)
-    const companiesList = queryParameters.get("symbols").split(',')
+    const queryParameters = new URLSearchParams(window.location.search);
+    const companiesList = queryParameters.get("symbols").split(",");
     const [profilesList, updateProfile] = React.useState({});
     const [historiesList, updateHistory] = React.useState([]);
 
     function addProfile(profile) {
-        profile.profile.description = ''
+        profile.profile.description = "";
         updateProfile((current) => {
-            return {...current, [profile.symbol]: profile}
-        })
+            return {...current, [profile.symbol]: profile};
+        });
     }
 
     function addHistory(history) {
         updateHistory((current) => {
-            return {...current, [history.symbol]: history}
-        })
+            return {...current, [history.symbol]: history};
+        });
     }
 
     useEffect(() => {
         companiesList.map((symbol) => {
-            getCompanyDetails(symbol, addProfile)
-            getCompanyHistory(symbol, addHistory)
-        })
-    }, [companiesList])
+            getCompanyDetails(symbol, addProfile);
+            getCompanyHistory(symbol, addHistory);
+        });
+    }, [companiesList]);
     return (
         <>
             <div className="row w-100 flex-nowrap">
@@ -46,12 +46,12 @@ function Compare() {
                                             <CompareCompanyDetails
                                                 profile={symbol in profilesList ? profilesList[symbol] : {}}/>
                                         </div>
-                                    )
+                                    );
                                 }
                             })}
                             <div className="col-1 d-md-flex d-none">
                                 <Link
-                                    to={queryParameters.get("search") === null ? '/' : `/?search=${queryParameters.get("search")}&symbols=${queryParameters.get("symbols")}`}>
+                                    to={queryParameters.get("search") === null ? "/" : `/?search=${queryParameters.get("search")}&symbols=${queryParameters.get("symbols")}`}>
                                     <img src={"/back.svg"} width={"100%"} alt="back"/>
                                 </Link>
                             </div>
@@ -65,8 +65,8 @@ function Compare() {
                 </div>
             </div>
         </>
-    )
+    );
 
 }
 
-export default Compare
+export default Compare;
