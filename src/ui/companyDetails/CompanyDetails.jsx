@@ -28,7 +28,6 @@ function CompanyDetails(details) {
             updateDescription("Description is absent")
         }
     }, [details, profileObject])
-    // console.log(details)
     return (
         <>
             <div className="row justify-content-start">

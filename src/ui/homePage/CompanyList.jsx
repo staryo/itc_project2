@@ -5,7 +5,7 @@ CompanyList.propTypes = {
     companyList: PropTypes.array,
     setCompareList: PropTypes.func,
     compareList: PropTypes.object
-}
+};
 
 function CompanyList({companyList, setCompareList, compareList}) {
     return (
@@ -33,7 +33,7 @@ function CompanyList({companyList, setCompareList, compareList}) {
                 </div>
             </div>
         </>
-    )
+    );
 }
 
-export default CompanyList
+export default CompanyList;
