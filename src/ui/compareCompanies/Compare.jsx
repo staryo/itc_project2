@@ -1,19 +1,19 @@
 import "../styles.css";
 import "bootstrap/dist/css/bootstrap.css";
 import React, {useEffect} from "react";
-import getCompanyDetails from "../../api/getCompanyDetails.js";
-import getCompanyHistory from "../../api/getCompanyHistory.js";
 import {ComparePriceChart} from "./ComparePriceChart.jsx";
 import CompareCompanyDetails from "./CompareCompanyDetails.jsx";
 import {Link} from "react-router-dom";
+import StockExchangeClass from "../../api/stockExchangeClass.js";
 
 
 
 function Compare() {
     const queryParameters = new URLSearchParams(window.location.search);
-    const [companiesList, updateCompaniesList] = React.useState(queryParameters.get("symbols").split(","));
+    const companiesList = queryParameters.get("symbols").split(",");
     const [profilesList, updateProfile] = React.useState({});
     const [historiesList, updateHistory] = React.useState([]);
+    const fetcher = new StockExchangeClass()
 
     function addProfile(profile) {
         profile.profile.description = "";
@@ -30,10 +30,10 @@ function Compare() {
 
     useEffect(() => {
         companiesList.map((symbol) => {
-            getCompanyDetails(symbol, addProfile);
-            getCompanyHistory(symbol, addHistory);
+            fetcher.getCompanyDetails(symbol, addProfile);
+            fetcher.getCompanyHistory(symbol, addHistory);
         });
-    }, [companiesList]);
+    }, []);
 
     return (
         <>

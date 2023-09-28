@@ -1,6 +1,6 @@
-import searchCompany from "../../api/getCompanies.js";
 import {useEffect, useState} from "react";
 import PropTypes from "prop-types";
+import StockExchangeClass from "../../api/stockExchangeClass.js";
 
 SearchString.propTypes = {
     setList: PropTypes.func,
@@ -10,6 +10,7 @@ function SearchString({setList}) {
     const queryParameters = new URLSearchParams(window.location.search)
     const [inputValue, setInputValue] = useState(queryParameters.get("search"))
     const [debouncedInputValue, setDebouncedInputValue] = useState(queryParameters.get("search"));
+    const fetcher = new StockExchangeClass()
 
     useEffect(() => {
         const timeoutId = setTimeout(() => {
@@ -28,7 +29,7 @@ function SearchString({setList}) {
             image: '/not-found.svg',
             changesPercentage: '?'
         }])
-        searchCompany(debouncedInputValue, setList)
+        fetcher.searchCompany(debouncedInputValue, setList)
         window.history.replaceState(
             history.state,
             null,

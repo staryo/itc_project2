@@ -1,20 +1,20 @@
-import '../styles.css'
-import {useParams} from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.css';
+import "../styles.css";
+import {useParams} from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.css";
 import CompanyDetails from "./CompanyDetails.jsx";
 import React, {useEffect} from "react";
-import getCompanyDetails from "../../api/getCompanyDetails.js";
-import getCompanyHistory from "../../api/getCompanyHistory.js";
 import {PriceChart} from "./PriceChart.jsx";
+import StockExchangeClass from "../../api/stockExchangeClass.js";
 
 function Company() {
     const {companyID} = useParams();
     const [profile, updateProfile] = React.useState({});
     const [history, updateHistory] = React.useState({});
+    const fetcher = new StockExchangeClass();
     useEffect(() => {
-        getCompanyDetails(companyID, updateProfile)
-        getCompanyHistory(companyID, updateHistory)
-    }, [companyID])
+        fetcher.getCompanyDetails(companyID, updateProfile);
+        fetcher.getCompanyHistory(companyID, updateHistory);
+    }, [companyID]);
     return (
         <>
             <div className="row w-100">
@@ -34,8 +34,8 @@ function Company() {
                 </div>
             </div>
         </>
-    )
+    );
 
 }
 
-export default Company
+export default Company;

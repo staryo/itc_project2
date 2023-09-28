@@ -1,16 +1,17 @@
 import Marquee from "react-fast-marquee";
 import React, {useEffect} from "react";
-import getDetailsForListOfCompanies from "../../api/getCompaniesForMarquee.js";
 import StockMarqueeListElement from "./StockMarqueeListElement.jsx";
+import StockExchangeClass from "../../api/stockExchangeClass.js";
 
 
 function StockMarquee() {
     const [topCompanies, updateTopCompanies] = React.useState([{
-        symbol: '',
+        symbol: "",
     }]);
+    const fetcher = new StockExchangeClass();
     useEffect(() => {
-        getDetailsForListOfCompanies(updateTopCompanies)
-    }, [])
+        fetcher.getCompaniesForMarquee(updateTopCompanies);
+    }, []);
 
     return (
         <>
@@ -30,7 +31,7 @@ function StockMarquee() {
                 </div>
             </div>
         </>
-    )
+    );
 }
 
-export default StockMarquee
+export default StockMarquee;
